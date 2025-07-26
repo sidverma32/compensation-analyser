@@ -61,8 +61,8 @@ uv pip install -r requirements.txt
 python assistant.py
 ```
 
-Ensure your OpenRouter API key is available as an environment variable
-`OPENROUTER_API_KEY` or in a `.env` file before starting the server.
+Ensure your OpenAI key is available as an environment variable
+`OPENAI_API_KEY` or in a `.env` file before starting the server.
 
 
 

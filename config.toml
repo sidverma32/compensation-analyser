@@ -3,7 +3,7 @@ data_dir = "data"
 date_fmt = "%Y-%m-%d %H:%M:%S"
 lag_days = 2
 leetcode_graphql_url = "https://leetcode.com/graphql"
-llm_predictor = "openrouter"
+llm_predictor = "openai"
 max_recs = 2000
 n_api_retries = 3
 
@@ -18,5 +18,7 @@ ollama_model = "llama3.1:8b-instruct-q5_K_M"
 openrouter_model = "meta-llama/llama-3.1-8b-instruct:free"
 openrouter_req_per_min = 20
 openrouter_url = "https://openrouter.ai/api/v1/chat/completions"
+openai_model = "gpt-3.5-turbo"
+openai_url = "https://api.openai.com/v1/chat/completions"
 vllm_model = "meta-llama/Meta-Llama-3-8B-Instruct"
 vllm_url = "http://localhost:8000/v1/completions"
