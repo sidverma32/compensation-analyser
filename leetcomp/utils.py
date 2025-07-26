@@ -31,9 +31,13 @@ def ollama_predict(prompt: str) -> str:
 
 
 def openrouter_predict(prompt: str) -> str:
+    api_key = os.getenv("OPENROUTER_API_KEY")
+    if not api_key:  # pragma: no cover - runtime safety
+        raise RuntimeError("OPENROUTER_API_KEY not set")
+
     response = requests.post(
         url=config["llms"]["openrouter_url"],
-        headers={"Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}"},
+        headers={"Authorization": f"Bearer {api_key}"},
         data=json.dumps(
             {
                 "model": config["llms"]["openrouter_model"],
