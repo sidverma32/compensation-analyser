@@ -385,6 +385,50 @@ function sortAndSliceData(companyCounts) {
     return [categories, counts];
 }
 
+function averageSalaryByCompany(jsonData) {
+    const companyTotals = {};
+    jsonData.forEach(({ company, total }) => {
+        if (!companyTotals[company]) {
+            companyTotals[company] = [];
+        }
+        companyTotals[company].push(total);
+    });
+
+    const avgData = Object.entries(companyTotals)
+        .map(([comp, totals]) => ({
+            name: comp,
+            avg:
+                totals.reduce((acc, val) => acc + val, 0) /
+                totals.length,
+        }))
+        .sort((a, b) => b.avg - a.avg)
+        .slice(0, 10);
+
+    const categories = avgData.map((d) => d.name);
+    const averages = avgData.map((d) => parseFloat(d.avg.toFixed(2)));
+
+    Highcharts.chart("avgCompanyBarPlot", {
+        chart: { type: "bar" },
+        title: { text: "" },
+        xAxis: { categories: categories, title: { text: null } },
+        yAxis: {
+            min: 0,
+            title: { text: "Avg ₹ LPA", align: "high" },
+            labels: { overflow: "justify" },
+        },
+        tooltip: { valueSuffix: " LPA" },
+        plotOptions: { bar: { dataLabels: { enabled: true } } },
+        legend: { enabled: false },
+        series: [
+            {
+                name: "Avg Total",
+                data: averages,
+                color: "#3478f6",
+            },
+        ],
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async function () {
 
     async function fetchOffers() {
@@ -402,6 +446,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     setStatsStr(filteredOffers);
     plotHistogram(filteredOffers, 'total');
     mostOfferCompanies(filteredOffers);
+    averageSalaryByCompany(filteredOffers);
     plotBoxPlot(filteredOffers, 'total', 'companyBoxPlot', 'company', new Set([]));
     plotBoxPlot(filteredOffers, 'total', 'yoeBucketBoxPlot', 'mapped_yoe', validYoeBucket);
 
@@ -461,6 +506,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         setStatsStr(filteredOffers);
         plotHistogram(filteredOffers, 'total');
         mostOfferCompanies(filteredOffers);
+        averageSalaryByCompany(filteredOffers);
         plotBoxPlot(filteredOffers, 'total', 'companyBoxPlot', 'company', new Set([]));
         plotBoxPlot(filteredOffers, 'total', 'yoeBucketBoxPlot', 'mapped_yoe', validYoeBucket);
         displayOffers(currentPage);
