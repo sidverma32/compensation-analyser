@@ -52,6 +52,19 @@ uv pip install -r requirements.txt  # Install from a requirements.txt file.
 $ export PYTHONPATH=.
 $ python leetcomp/refresh.py && python leetcomp/parse.py
 ```
+## Assistant
+
+Run the Flask assistant server to enable the floating chat widget.
+
+```bash
+uv pip install -r requirements.txt
+python assistant.py
+```
+
+Ensure your OpenRouter API key is available as an environment variable
+`OPENROUTER_API_KEY` or in a `.env` file before starting the server.
+
+
 
 ## Roadmap
 
