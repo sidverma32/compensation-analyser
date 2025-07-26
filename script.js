@@ -10,6 +10,78 @@ let totalPages = 0;
 const svgWidth = 16;
 const svgHeight = 16;
 
+let currentLang = 'en';
+const translations = {
+    en: {
+        title: 'Compensation Analyzer',
+        salaryDistribution: 'Salary Distribution',
+        yoeBucketBoxPlot: 'YOE Bucket Box Plot',
+        companyBoxPlot: 'Company Box Plot',
+        offersPerCompany: 'Offers per Company',
+        averageSalaryByCompany: 'Average Salary by Company',
+        searchPlaceholder: 'Company/Location/Role',
+        search: 'Search',
+        filters: 'Filters',
+        yoeYears: 'Years of Experience:',
+        min: 'Min:',
+        max: 'Max:',
+        totalSalary: 'Total Salary (₹ LPA):',
+        includesInterviewExp: 'Includes Interview Experience',
+        apply: 'Apply',
+        clearFilters: 'Clear Filters',
+        previous: 'Previous',
+        next: 'Next',
+        stats: 'Based on {n} recs parsed between {start} and {end} (★ = Posts that incl. Interview Experience)',
+        offersAxis: '# Offers',
+        avgLPA: 'Avg ₹ LPA',
+        avgTotal: 'Avg Total',
+        tableId: 'ID',
+        tableCompany: 'Company',
+        tableLocationDate: 'Location | Date',
+        tableRole: 'Role',
+        tableYoe: 'Yoe',
+        tableTotal: 'Total',
+        tableBase: 'Base',
+        salaries: 'Salaries'
+    },
+    es: {
+        title: 'Analizador de Compensación',
+        salaryDistribution: 'Distribución Salarial',
+        yoeBucketBoxPlot: 'Diagrama de caja por Experiencia',
+        companyBoxPlot: 'Diagrama de caja por Compañía',
+        offersPerCompany: 'Ofertas por Compañía',
+        averageSalaryByCompany: 'Salario Promedio por Compañía',
+        searchPlaceholder: 'Empresa/Ubicación/Rol',
+        search: 'Buscar',
+        filters: 'Filtros',
+        yoeYears: 'Años de Experiencia:',
+        min: 'Mín:',
+        max: 'Máx:',
+        totalSalary: 'Salario Total (₹ LPA):',
+        includesInterviewExp: 'Incluye Experiencia de Entrevista',
+        apply: 'Aplicar',
+        clearFilters: 'Borrar Filtros',
+        previous: 'Anterior',
+        next: 'Siguiente',
+        stats: 'Basado en {n} registros entre {start} y {end} (★ = Publicaciones con Experiencia de Entrevista)',
+        offersAxis: '# Ofertas',
+        avgLPA: 'Prom ₹ LPA',
+        avgTotal: 'Prom Total',
+        tableId: 'ID',
+        tableCompany: 'Compañía',
+        tableLocationDate: 'Ubicación | Fecha',
+        tableRole: 'Puesto',
+        tableYoe: 'Años',
+        tableTotal: 'Total',
+        tableBase: 'Base',
+        salaries: 'Salarios'
+    }
+};
+
+function t(key) {
+    return translations[currentLang][key] || key;
+}
+
 const starSVG = `
     <svg fill="#000000" width="14px" height="14px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon">
         <path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/>
@@ -40,6 +112,38 @@ let globalFilterState = {
 
 const GLOBAL_ALLOWED_FILTERS = ["company", "location", "mapped_role"];
 
+function setLanguage(lang) {
+    currentLang = translations[lang] ? lang : 'en';
+    document.documentElement.lang = currentLang;
+    document.getElementById('pageTitle').textContent = t('title');
+    document.getElementById('hdrSalaryDistribution').textContent = t('salaryDistribution');
+    document.getElementById('hdrYoeBucket').textContent = t('yoeBucketBoxPlot');
+    document.getElementById('hdrCompanyBox').textContent = t('companyBoxPlot');
+    document.getElementById('hdrOffersPerCompany').textContent = t('offersPerCompany');
+    document.getElementById('hdrAvgSalary').textContent = t('averageSalaryByCompany');
+    document.getElementById('searchInput').placeholder = t('searchPlaceholder');
+    document.getElementById('btnSearch').textContent = t('search');
+    document.getElementById('btnFilters').textContent = t('filters');
+    document.getElementById('lblYoeYears').textContent = t('yoeYears');
+    document.querySelectorAll('.lblMin').forEach(el => el.textContent = t('min') || 'Min:');
+    document.querySelectorAll('.lblMax').forEach(el => el.textContent = t('max') || 'Max:');
+    document.getElementById('lblTotalSalary').textContent = t('totalSalary');
+    document.getElementById('lblInterviewExp').textContent = t('includesInterviewExp');
+    document.getElementById('btnApply').textContent = t('apply');
+    document.getElementById('btnClearFilters').textContent = t('clearFilters');
+    document.getElementById('btnPrev').textContent = t('previous');
+    document.getElementById('btnNext').textContent = t('next');
+
+    // Refresh stats and charts with new labels
+    setStatsStr(filteredOffers);
+    plotHistogram(filteredOffers, 'total');
+    mostOfferCompanies(filteredOffers);
+    averageSalaryByCompany(filteredOffers);
+    plotBoxPlot(filteredOffers, 'total', 'companyBoxPlot', 'company', new Set([]));
+    plotBoxPlot(filteredOffers, 'total', 'yoeBucketBoxPlot', 'mapped_yoe', validYoeBucket);
+    displayOffers(currentPage);
+}
+
 // Utility Functions
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -64,7 +168,10 @@ function setStatsStr(data) {
     const nRecs = data.length;
     const startDate = data[0]?.creation_date;
     const endDate = data[nRecs - 1]?.creation_date;
-    let statsStr = `Based on ${nRecs} recs parsed between ${startDate} and ${endDate} (★ = Posts that incl. Interview Experience)`;
+    let statsStr = t('stats')
+        .replace('{n}', nRecs)
+        .replace('{start}', startDate)
+        .replace('{end}', endDate);
     document.getElementById('statsStr').innerHTML = statsStr;
 }
 
@@ -108,8 +215,8 @@ function initializeHistogramChart(chartData, baseOrTotal) {
             labels: { rotation: 0 }
         },
         yAxis: { title: { text: '' } },
-        legend: { enabled: false },
-        series: [{ name: 'Total', data: chartData, color: '#3478f6' }],
+        legend: { enabled: true },
+        series: [{ name: t('tableTotal'), data: chartData, color: '#3478f6' }],
         plotOptions: {
             series: {
                 dataLabels: { enabled: true, format: '{point.y}' },
@@ -128,13 +235,13 @@ function initializeBarChart(categories, counts) {
         },
         yAxis: {
             min: 0,
-            title: { text: '# Offers', align: 'high' },
+            title: { text: t('offersAxis'), align: 'high' },
             labels: { overflow: 'justify' }
         },
         tooltip: { valueSuffix: ' occurrences' },
         plotOptions: { bar: { dataLabels: { enabled: true } } },
-        legend: { enabled: false },
-        series: [{ name: 'Offers', data: counts, color: '#3478f6' }]
+        legend: { enabled: true },
+        series: [{ name: t('offersPerCompany'), data: counts, color: '#3478f6' }]
     });
 }
 
@@ -143,7 +250,7 @@ function initializeBoxPlotChart(docId, boxPlotData, baseOrTotal, roleOrCompany) 
     Highcharts.chart(docId, {
         chart: { type: 'boxplot' },
         title: { text: '' },
-        legend: { enabled: false },
+        legend: { enabled: true },
         xAxis: {
             categories: boxPlotData.map(item => item.name),
             title: { text: '' },
@@ -153,7 +260,7 @@ function initializeBoxPlotChart(docId, boxPlotData, baseOrTotal, roleOrCompany) 
             title: { text: `${capitalize(baseOrTotal)} Compensation (₹ LPA)` }
         },
         series: [{
-            name: 'Salaries',
+            name: t('salaries'),
             data: boxPlotData.map(item => item.data[0]),
             tooltip: { headerFormat: `<em>${capitalize(roleOrCompany)}: {point.key}</em><br/>` },
             color: '#3478f6'
@@ -233,22 +340,22 @@ function displayOffers(page) {
     const indexHeader = headerRow.insertCell();
     indexHeader.innerHTML = '<b style="font-size: 13px;" data-column="#">#</b>';
     const idHeader = headerRow.insertCell();
-    idHeader.innerHTML = '<b style="font-size: 13px;">ID</b>';
+    idHeader.innerHTML = `<b style="font-size: 13px;">${t('tableId')}</b>`;
     const companyHeader = headerRow.insertCell();
     companyHeader.innerHTML = `
-    <b style="font-size: 13px;" >Company<br>
-    <span class="text-secondary">Location | Date</span></b>
+    <b style="font-size: 13px;" >${t('tableCompany')}<br>
+    <span class="text-secondary">${t('tableLocationDate')}</span></b>
     `;
     const roleHeader = headerRow.insertCell();
-    roleHeader.innerHTML = '<b style="font-size: 13px;" >Role</b>';
+    roleHeader.innerHTML = `<b style="font-size: 13px;" >${t('tableRole')}</b>`;
     const yoeHeader = headerRow.insertCell();
-    yoeHeader.innerHTML = `<b style="font-size: 13px;" data-column="yoe" role="button"> Yoe ${getSortArrow('yoe')}</b>`;
+    yoeHeader.innerHTML = `<b style="font-size: 13px;" data-column="yoe" role="button"> ${t('tableYoe')} ${getSortArrow('yoe')}</b>`;
     const salaryHeader = headerRow.insertCell();
 
     salaryHeader.innerHTML = `
     <p class="text-end" style="margin-bottom: 0px;">
-    <b style="font-size: 13px;" data-column="total" role="button">${getSortArrow('total')} Total <br>
-    <span class="text-secondary">Base</span></b></p>
+    <b style="font-size: 13px;" data-column="total" role="button">${getSortArrow('total')} ${t('tableTotal')} <br>
+    <span class="text-secondary">${t('tableBase')}</span></b></p>
     `;
 
     // Add event listeners to headers for sorting
@@ -413,15 +520,15 @@ function averageSalaryByCompany(jsonData) {
         xAxis: { categories: categories, title: { text: null } },
         yAxis: {
             min: 0,
-            title: { text: "Avg ₹ LPA", align: "high" },
+            title: { text: t('avgLPA'), align: "high" },
             labels: { overflow: "justify" },
         },
         tooltip: { valueSuffix: " LPA" },
         plotOptions: { bar: { dataLabels: { enabled: true } } },
-        legend: { enabled: false },
+        legend: { enabled: true },
         series: [
             {
-                name: "Avg Total",
+                name: t('avgTotal'),
                 data: averages,
                 color: "#3478f6",
             },
@@ -449,6 +556,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     averageSalaryByCompany(filteredOffers);
     plotBoxPlot(filteredOffers, 'total', 'companyBoxPlot', 'company', new Set([]));
     plotBoxPlot(filteredOffers, 'total', 'yoeBucketBoxPlot', 'mapped_yoe', validYoeBucket);
+
+    // Language selector
+    const langSelect = document.getElementById('languageSelect');
+    langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+    setLanguage(langSelect.value);
 
     // Pagination event listeners
     document.getElementById('prevPage').addEventListener('click', () => {
