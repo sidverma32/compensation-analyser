@@ -1,6 +1,6 @@
 <p align="center">
 <img src="./assets/leetcomp_banner.png">
-<sub>https://sidverma.github.io/compensation-analyser</sub>
+<sub>https://sidverma32.github.io/compensation-analyser/</sub>
 </p>
 
 <p align="center">
@@ -9,7 +9,7 @@
 <a href="http://mypy-lang.org/"><img src="http://www.mypy-lang.org/static/mypy_badge.svg" alt="Checked with mypy" /></a>
 </p>
 
-**[Compensation Analyzer](https://sidverma.github.io/compensation-analyser)** is a tool that helps you find **Software Engineer Salary in India** by:
+**[Compensation Analyzer](https://sidverma32.github.io/compensation-analyser/)** is a tool that helps you find **Software Engineer Salary in India** by:
 - Fetching compensation data from Leetcode forums.
 - Updating Bi-weekly through GitHub action PRs.
 - Using LLMs for parsing and sanitizing structured data from posts, followed by aggregation.
