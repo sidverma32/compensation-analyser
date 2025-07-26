@@ -53,19 +53,6 @@ $ export PYTHONPATH=.
 $ python leetcomp/refresh.py && python leetcomp/parse.py
 ```
 
-## Chatbot
-
-The site includes a floating chat widget powered by [Deep Chat](https://deepchat.dev).
-Set an `OPENAI_API_KEY` global variable before loading `index.html`:
-
-```html
-<script>
-  window.OPENAI_API_KEY = 'your-key';
-</script>
-```
-
-The widget is loaded from a CDN and connects directly to OpenAI.
-
 ## Roadmap
 
 - [x] Sort by Compensation and Yoe
