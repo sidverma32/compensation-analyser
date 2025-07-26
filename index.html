@@ -174,18 +174,7 @@
             </div>
         </div>
         <div id="offersTable"></div>
-        <deep-chat id="chatBot" style="position: fixed; bottom: 20px; right: 20px;" webModel="true"></deep-chat>
     </div>
-
-    <script type="module" src="https://unpkg.com/deep-chat@2.2.2/dist/deepChat.bundle.js"></script>
-    <script type="module">
-        import * as webLLM from 'https://unpkg.com/deep-chat-web-llm?module';
-        window.webLLM = webLLM;
-    </script>
-    <script>
-        const chatBot = document.getElementById('chatBot');
-        chatBot.directConnection = { openAI: { apiKey: window.OPENAI_API_KEY } };
-    </script>
 
     <script>
         function toggleDropdown() {
