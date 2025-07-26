@@ -111,6 +111,24 @@
         ]
     },
     {
+        "cluster_name": "Product Manager",
+        "cluster": [
+            "productmanager",
+            "pm",
+            "productmanagement",
+            "productowner"
+        ]
+    },
+    {
+        "cluster_name": "Technical Program Manager",
+        "cluster": [
+            "technicalprogrammanager",
+            "tpm",
+            "programmanager",
+            "tpmm"
+        ]
+    },
+    {
         "cluster_name": "Others",
         "cluster": [
             "fullstackdeveloper",
