@@ -4,8 +4,8 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/sidverma/compensation-analyser/actions/workflows/data-refresh.yaml"><img src="https://github.com/sidverma/compensation-analyser/actions/workflows/data-refresh.yaml/badge.svg" alt="automatic-data-update"/ ></a>
-<a href="https://github.com/sidverma/compensation-analyser/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/sidverma/compensation-analyser/actions/workflows/pages/pages-build-deployment/badge.svg" alt="pages-build-deployment" /></a>
+<a href="https://github.com/sidverma32/compensation-analyser/actions/workflows/data-refresh.yaml"><img src="https://github.com/sidverma32/compensation-analyser/actions/workflows/data-refresh.yaml/badge.svg" alt="automatic-data-update"/ ></a>
+<a href="https://github.com/sidverma32/compensation-analyser/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/sidverma32/compensation-analyser/actions/workflows/pages/pages-build-deployment/badge.svg" alt="pages-build-deployment" /></a>
 <a href="http://mypy-lang.org/"><img src="http://www.mypy-lang.org/static/mypy_badge.svg" alt="Checked with mypy" /></a>
 </p>
 

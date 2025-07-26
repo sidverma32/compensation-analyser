@@ -70,9 +70,9 @@ def parsed_content_is_valid(
         try:
             assert isinstance(item, dict), "item is not a dict"
 
-            assert isinstance(
-                item["base_offer"], (int, float)
-            ), "base_offer is not a number"
+            assert isinstance(item["base_offer"], (int, float)), (
+                "base_offer is not a number"
+            )
 
             assert (
                 config["parsing"]["min_base_offer"]
@@ -80,9 +80,9 @@ def parsed_content_is_valid(
                 <= config["parsing"]["max_base_offer"]
             ), "base_offer out of range"
 
-            assert isinstance(
-                item["total_offer"], (int, float)
-            ), "total_offer is not a number"
+            assert isinstance(item["total_offer"], (int, float)), (
+                "total_offer is not a number"
+            )
 
             assert (
                 config["parsing"]["min_total_offer"]
