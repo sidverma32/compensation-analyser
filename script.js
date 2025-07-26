@@ -865,6 +865,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: text })
             });
+            const contentType = resp.headers.get("content-type") || "";
+            if (!contentType.includes("application/json")) {
+                const respText = await resp.text();
+                throw new Error(respText || `Unexpected response (${resp.status})`);
+            }
             const data = await resp.json();
             appendAssistantMessage("bot", data.reply || data.error || "Error");
         } catch (err) {

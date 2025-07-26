@@ -49,6 +49,23 @@ def openrouter_predict(prompt: str) -> str:
     return str(response.json()["choices"][0]["message"]["content"])
 
 
+def openai_predict(prompt: str) -> str:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:  # pragma: no cover - runtime safety
+        raise RuntimeError("OPENAI_API_KEY not set")
+
+    response = requests.post(
+        url=config["llms"]["openai_url"],
+        headers={"Authorization": f"Bearer {api_key}"},
+        json={
+            "model": config["llms"]["openai_model"],
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.3,
+        },
+    )
+    return str(response.json()["choices"][0]["message"]["content"])
+
+
 def vllm_predict(prompt: str) -> str:
     response = requests.post(
         config["llms"]["vllm_url"],
@@ -68,6 +85,8 @@ def get_model_predict(inf_engine: str) -> Callable[[str], str]:
             return ollama_predict
         case "openrouter":
             return openrouter_predict
+        case "openai":
+            return openai_predict
         case "vllm":
             return vllm_predict
         case _:
