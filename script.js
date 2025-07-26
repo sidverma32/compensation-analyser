@@ -16,6 +16,21 @@ const starSVG = `
     </svg>
 `;
 
+Highcharts.setOptions({
+    chart: {
+        backgroundColor: 'transparent',
+        style: { fontFamily: 'Inter, sans-serif' }
+    },
+    colors: ['#3478f6'],
+    credits: { enabled: false },
+    responsive: {
+        rules: [{
+            condition: { maxWidth: 768 },
+            chartOptions: { chart: { height: '60%' } }
+        }]
+    }
+});
+
 let globalFilterState = {
     searchString: '',
     yoeRange: [null, null], // Assuming null means no filter
@@ -94,7 +109,7 @@ function initializeHistogramChart(chartData, baseOrTotal) {
         },
         yAxis: { title: { text: '' } },
         legend: { enabled: false },
-        series: [{ name: 'Total', data: chartData, color: '#55b17f' }],
+        series: [{ name: 'Total', data: chartData, color: '#3478f6' }],
         plotOptions: {
             series: {
                 dataLabels: { enabled: true, format: '{point.y}' },
@@ -119,7 +134,7 @@ function initializeBarChart(categories, counts) {
         tooltip: { valueSuffix: ' occurrences' },
         plotOptions: { bar: { dataLabels: { enabled: true } } },
         legend: { enabled: false },
-        series: [{ name: 'Offers', data: counts, color: '#55b17f' }]
+        series: [{ name: 'Offers', data: counts, color: '#3478f6' }]
     });
 }
 
@@ -141,7 +156,7 @@ function initializeBoxPlotChart(docId, boxPlotData, baseOrTotal, roleOrCompany) 
             name: 'Salaries',
             data: boxPlotData.map(item => item.data[0]),
             tooltip: { headerFormat: `<em>${capitalize(roleOrCompany)}: {point.key}</em><br/>` },
-            color: '#55b17f'
+            color: '#3478f6'
         }]
     });
 }

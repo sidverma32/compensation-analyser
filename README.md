@@ -1,15 +1,15 @@
 <p align="center">
 <img src="./assets/leetcomp_banner.png">
-<sub>https://kuutsav.github.io/leetcode-compensation</sub>
+<sub>https://sidverma.github.io/compensation-analyser</sub>
 </p>
 
 <p align="center">
-<a href="https://github.com/kuutsav/leetcode-compensation/actions/workflows/data-refresh.yaml"><img src="https://github.com/kuutsav/leetcode-compensation/actions/workflows/data-refresh.yaml/badge.svg" alt="automatic-data-update"/ ></a>
-<a href="https://github.com/kuutsav/leetcode-compensation/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/kuutsav/leetcode-compensation/actions/workflows/pages/pages-build-deployment/badge.svg" alt="pages-build-deployment" /></a>
+<a href="https://github.com/sidverma/compensation-analyser/actions/workflows/data-refresh.yaml"><img src="https://github.com/sidverma/compensation-analyser/actions/workflows/data-refresh.yaml/badge.svg" alt="automatic-data-update"/ ></a>
+<a href="https://github.com/sidverma/compensation-analyser/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/sidverma/compensation-analyser/actions/workflows/pages/pages-build-deployment/badge.svg" alt="pages-build-deployment" /></a>
 <a href="http://mypy-lang.org/"><img src="http://www.mypy-lang.org/static/mypy_badge.svg" alt="Checked with mypy" /></a>
 </p>
 
-**[LeetCode Compensation](https://kuutsav.github.io/leetcode-compensation)** is a tool that helps you find **Software Engineer Salary in India** by:
+**[Compensation Analyzer](https://sidverma.github.io/compensation-analyser)** is a tool that helps you find **Software Engineer Salary in India** by:
 - Fetching compensation data from Leetcode forums.
 - Updating Bi-weekly through GitHub action PRs.
 - Using LLMs for parsing and sanitizing structured data from posts, followed by aggregation.
