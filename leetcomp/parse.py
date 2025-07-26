@@ -252,7 +252,15 @@ def jsonl_to_json(jsonl_path: str, json_path: str) -> None:
                 role_to_map,
                 role_map,
                 default=record["role"],
-                extras=["analyst", "intern", "associate"],
+                extras=[
+                    "analyst",
+                    "intern",
+                    "associate",
+                    "productmanager",
+                    "programmanager",
+                    "technicalprogrammanager",
+                    "tpm",
+                ],
             )
             record["mapped_yoe"] = map_yoe(record["yoe"], yoe_map)
             record["location"] = map_location(record["location"], location_map)

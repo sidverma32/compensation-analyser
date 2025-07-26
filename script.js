@@ -42,7 +42,9 @@ const translations = {
         tableYoe: 'Yoe',
         tableTotal: 'Total',
         tableBase: 'Base',
-        salaries: 'Salaries'
+        salaries: 'Salaries',
+        roleFilter: 'Role',
+        allRoles: 'All Roles'
     },
     es: {
         title: 'Analizador de Compensación',
@@ -74,7 +76,111 @@ const translations = {
         tableYoe: 'Años',
         tableTotal: 'Total',
         tableBase: 'Base',
-        salaries: 'Salarios'
+        salaries: 'Salarios',
+        roleFilter: 'Rol',
+        allRoles: 'Todos'
+    },
+    hi: {
+        title: 'कंपनसेशन विश्लेषक',
+        salaryDistribution: 'वेतन वितरण',
+        yoeBucketBoxPlot: 'अनुभव बॉक्स प्लॉट',
+        companyBoxPlot: 'कंपनी बॉक्स प्लॉट',
+        offersPerCompany: 'कंपनी प्रति ऑफर',
+        averageSalaryByCompany: 'कंपनी अनुसार औसत वेतन',
+        searchPlaceholder: 'कंपनी/स्थान/भूमिका',
+        search: 'खोजें',
+        filters: 'फ़िल्टर',
+        yoeYears: 'अनुभव (वर्ष):',
+        min: 'न्यूनतम:',
+        max: 'अधिकतम:',
+        totalSalary: 'कुल वेतन (₹ LPA):',
+        includesInterviewExp: 'इंटरव्यू अनुभव शामिल',
+        apply: 'लागू करें',
+        clearFilters: 'फ़िल्टर साफ़ करें',
+        previous: 'पिछला',
+        next: 'अगला',
+        stats: '{start} से {end} के बीच {n} रिकॉर्ड्स पर आधारित (★ = इंटरव्यू अनुभव वाली पोस्ट)',
+        offersAxis: '# ऑफर',
+        avgLPA: 'औसत ₹ LPA',
+        avgTotal: 'औसत कुल',
+        tableId: 'आईडी',
+        tableCompany: 'कंपनी',
+        tableLocationDate: 'स्थान | दिनांक',
+        tableRole: 'भूमिका',
+        tableYoe: 'अनुभव',
+        tableTotal: 'कुल',
+        tableBase: 'बेस',
+        salaries: 'वेतन',
+        roleFilter: 'भूमिका',
+        allRoles: 'सभी भूमिकाएँ'
+    },
+    kn: {
+        title: 'ಪರಿಹಾರ ವಿಶ್ಲೇಷಕ',
+        salaryDistribution: 'ಸಂಬಳ ಹಂಚಿಕೆ',
+        yoeBucketBoxPlot: 'ಅನುಭವ ಬಾಕ್ಸ್ ಪ್ಲಾಟ್',
+        companyBoxPlot: 'ಕಂಪನಿ ಬಾಕ್ಸ್ ಪ್ಲಾಟ್',
+        offersPerCompany: 'ಕಂಪನಿಗೆ ಆಫರ್',
+        averageSalaryByCompany: 'ಕಂಪನಿಯ ಸರಾಸರಿ ವೇತನ',
+        searchPlaceholder: 'ಕಂಪನಿ/ಸ್ಥಳ/ಪಾತ್ರ',
+        search: 'ಹುಡುಕಿ',
+        filters: 'ಫಿಲ್ಟರ್',
+        yoeYears: 'ಅನುಭವ (ವರ್ಷ):',
+        min: 'ಕನಿಷ್ಟ:',
+        max: 'ಗರಿಷ್ಠ:',
+        totalSalary: 'ಒಟ್ಟು ವೇತನ (₹ LPA):',
+        includesInterviewExp: 'ಇಂಟರ್ವ್ಯೂ ಅನುಭವ ಸೇರಿದೆ',
+        apply: 'ಅನ್ವಯಿಸಿ',
+        clearFilters: 'ಫಿಲ್ಟರ್ ಅಳಿಸಿ',
+        previous: 'ಹಿಂದಿನ',
+        next: 'ಮುಂದಿನ',
+        stats: '{start} ರಿಂದ {end} ರವರೆಗೆ {n} ದಾಖಲೆಗಳ ಆಧಾರಿತ (★ = ಇಂಟರ್ವ್ಯೂ ಅನುಭವ ಇರುವ ಪೋಸ್ಟ್)',
+        offersAxis: '# ಆಫರ್',
+        avgLPA: 'ಶರಾಸರಿ ₹ LPA',
+        avgTotal: 'ಶರಾಸರಿ ಒಟ್ಟು',
+        tableId: 'ಐಡಿ',
+        tableCompany: 'ಕಂಪನಿ',
+        tableLocationDate: 'ಸ್ಥಳ | ದಿನಾಂಕ',
+        tableRole: 'ಪಾತ್ರ',
+        tableYoe: 'ಅನುಭವ',
+        tableTotal: 'ಒಟ್ಟು',
+        tableBase: 'ಬೇಸ್',
+        salaries: 'ವೇತನ',
+        roleFilter: 'ಪಾತ್ರ',
+        allRoles: 'ಎಲ್ಲಾ ಪಾತ್ರಗಳು'
+    },
+    de: {
+        title: 'Vergütungsanalysator',
+        salaryDistribution: 'Gehaltsverteilung',
+        yoeBucketBoxPlot: 'Erfahrungs-Boxplot',
+        companyBoxPlot: 'Unternehmens-Boxplot',
+        offersPerCompany: 'Angebote pro Unternehmen',
+        averageSalaryByCompany: 'Durchschnittsgehalt nach Unternehmen',
+        searchPlaceholder: 'Firma/Ort/Rolle',
+        search: 'Suchen',
+        filters: 'Filter',
+        yoeYears: 'Jahre Erfahrung:',
+        min: 'Min:',
+        max: 'Max:',
+        totalSalary: 'Gesamtgehalt (₹ LPA):',
+        includesInterviewExp: 'Mit Interview-Erfahrung',
+        apply: 'Übernehmen',
+        clearFilters: 'Filter löschen',
+        previous: 'Zurück',
+        next: 'Weiter',
+        stats: 'Basierend auf {n} Einträgen zwischen {start} und {end} (★ = Beiträge mit Interview-Erfahrung)',
+        offersAxis: '# Angebote',
+        avgLPA: 'Durchschn ₹ LPA',
+        avgTotal: 'Durchschn Gesamt',
+        tableId: 'ID',
+        tableCompany: 'Firma',
+        tableLocationDate: 'Ort | Datum',
+        tableRole: 'Rolle',
+        tableYoe: 'Erfahrung',
+        tableTotal: 'Gesamt',
+        tableBase: 'Grund',
+        salaries: 'Gehälter',
+        roleFilter: 'Rolle',
+        allRoles: 'Alle Rollen'
     }
 };
 
@@ -107,7 +213,8 @@ let globalFilterState = {
     searchString: '',
     yoeRange: [null, null], // Assuming null means no filter
     salaryRange: [null, null],
-    includeInterviewExp: false
+    includeInterviewExp: false,
+    roleFilter: ''
 };
 
 const GLOBAL_ALLOWED_FILTERS = ["company", "location", "mapped_role"];
@@ -133,6 +240,8 @@ function setLanguage(lang) {
     document.getElementById('btnClearFilters').textContent = t('clearFilters');
     document.getElementById('btnPrev').textContent = t('previous');
     document.getElementById('btnNext').textContent = t('next');
+    document.getElementById('lblRoleFilter').textContent = t('roleFilter');
+    populateRoleFilter(offers);
 
     // Refresh stats and charts with new labels
     setStatsStr(filteredOffers);
@@ -202,6 +311,27 @@ function prepareChartData(frequencies) {
         name: `${bin * 10}-${bin * 10 + 9}`,
         y: count
     }));
+}
+
+function populateRoleFilter(data) {
+    const select = document.getElementById('roleFilterSelect');
+    if (!select) return;
+    const previous = globalFilterState.roleFilter;
+    select.innerHTML = '';
+    const defaultOpt = document.createElement('option');
+    defaultOpt.value = '';
+    defaultOpt.textContent = t('allRoles');
+    select.appendChild(defaultOpt);
+
+    const roles = Array.from(new Set(data.map(o => o.mapped_role))).sort();
+    roles.forEach(role => {
+        const opt = document.createElement('option');
+        opt.value = role;
+        opt.textContent = role;
+        select.appendChild(opt);
+    });
+
+    select.value = previous;
 }
 
 // Highcharts Initialization Functions
@@ -378,13 +508,13 @@ function displayOffers(page) {
         idCell.innerHTML = `
         <p>
             <abbr title="attribute">
-                <a class="link-secondary" target="_blank" href="https://leetcode.com/discuss/compensation/${offer.id}">
+                <a class="link-primary" target="_blank" href="https://leetcode.com/discuss/compensation/${offer.id}">
                     ${offer.id}
                 </a>
             </abbr>
             ${'interview_exp' in offer && offer.interview_exp !== 'N/A' ?
                 `<span style="margin-left: 4px;">
-                <a class="link-secondary" target="_blank" style="text-decoration: none;" href='${offer.interview_exp}'>★</a>
+                <a class="link-primary" target="_blank" style="text-decoration: none;" href='${offer.interview_exp}'>★</a>
                 </span>` :
             ''}
         </p>
@@ -545,6 +675,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         filteredOffers = [...offers];
         totalPages = Math.ceil(filteredOffers.length / offersPerPage);
         displayOffers(currentPage);
+        populateRoleFilter(offers);
     }
 
     await fetchOffers();
@@ -582,6 +713,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         currentPage = parseInt(event.target.value);
         displayOffers(currentPage);
     });
+
+    document.getElementById('roleFilterSelect').addEventListener('change', (e) => {
+        globalFilterState.roleFilter = e.target.value;
+        filterOffers();
+    });
     function filterOffers() {
         currentSort = { column: null, order: 'asc' };
 
@@ -607,6 +743,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         if (globalFilterState.includeInterviewExp) {
             tempFilteredOffers = tempFilteredOffers.filter(offer =>
                 offer.interview_exp !== "N/A"
+            );
+        }
+
+        if (globalFilterState.roleFilter) {
+            tempFilteredOffers = tempFilteredOffers.filter(
+                offer => offer.mapped_role === globalFilterState.roleFilter
             );
         }
 
@@ -671,10 +813,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             interviewExpCheckbox.checked = false;
         }
 
+        document.getElementById('roleFilterSelect').value = '';
+
         // Reset global filter state
         globalFilterState.yoeRange = [null, null];
         globalFilterState.salaryRange = [null, null];
         globalFilterState.includeInterviewExp = false;
+        globalFilterState.roleFilter = '';
 
         // Apply filter function with cleared filters
         filterOffers();
