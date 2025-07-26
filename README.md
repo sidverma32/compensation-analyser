@@ -52,19 +52,19 @@ uv pip install -r requirements.txt  # Install from a requirements.txt file.
 $ export PYTHONPATH=.
 $ python leetcomp/refresh.py && python leetcomp/parse.py
 ```
-## Assistant
 
-Run the Flask assistant server to enable the floating chat widget.
+## Chatbot
 
-```bash
-uv pip install -r requirements.txt
-python assistant.py
+The site includes a floating chat widget powered by [Deep Chat](https://deepchat.dev).
+Set an `OPENAI_API_KEY` global variable before loading `index.html`:
+
+```html
+<script>
+  window.OPENAI_API_KEY = 'your-key';
+</script>
 ```
 
-Ensure your OpenAI key is available as an environment variable
-`OPENAI_API_KEY` or in a `.env` file before starting the server.
-
-
+The widget is loaded from a CDN and connects directly to OpenAI.
 
 ## Roadmap
 
