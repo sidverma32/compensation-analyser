@@ -41,45 +41,10 @@
     .custom-input-width {
         width: 60px;
     }
+
     .chart-container {
         min-height: 320px;
         height: 45vh;
-    }
-    .fab {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: #3478f6;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1000;
-    }
-    .assistant-panel {
-        display: none;
-        position: fixed;
-        bottom: 80px;
-        right: 20px;
-        width: 300px;
-        max-height: 400px;
-        background-color: #ffffff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        overflow-y: auto;
-        z-index: 1000;
-    }
-    .assistant-message {
-        margin-bottom: 8px;
-    }
-    .assistant-message.user {
-        text-align: right;
     }
 </style>
 
@@ -209,15 +174,14 @@
             </div>
         </div>
         <div id="offersTable"></div>
-        <div id="assistantPanel" class="assistant-panel">
-            <div id="assistantChat"></div>
-            <div class="input-group mt-2">
-                <input type="text" id="assistantInput" class="form-control form-control-sm" placeholder="Ask a question">
-                <button class="btn btn-primary btn-sm" id="assistantSend">Send</button>
-            </div>
-        </div>
-        <div id="assistantFab" class="fab">🤖</div>
+        <deep-chat id="chatBot" style="position: fixed; bottom: 20px; right: 20px;"></deep-chat>
     </div>
+
+    <script src="https://unpkg.com/deep-chat@2.2.2/dist/deepChat.bundle.js"></script>
+    <script>
+        const chatBot = document.getElementById('chatBot');
+        chatBot.directConnection = { openAI: { apiKey: window.OPENAI_API_KEY } };
+    </script>
 
     <script>
         function toggleDropdown() {

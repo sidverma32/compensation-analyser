@@ -832,48 +832,4 @@ document.addEventListener('DOMContentLoaded', async function () {
             filterOffersByCompany(searchInput);
         }
     });
-    document.getElementById("assistantFab").addEventListener("click", () => {
-        const panel = document.getElementById("assistantPanel");
-        panel.style.display = panel.style.display === "block" ? "none" : "block";
-    });
-
-    document.getElementById("assistantSend").addEventListener("click", sendAssistantMessage);
-    document.getElementById("assistantInput").addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            sendAssistantMessage();
-        }
-    });
-
-    function appendAssistantMessage(role, text) {
-        const chat = document.getElementById("assistantChat");
-        const div = document.createElement("div");
-        div.className = `assistant-message ${role}`;
-        div.textContent = text;
-        chat.appendChild(div);
-        chat.scrollTop = chat.scrollHeight;
-    }
-
-    async function sendAssistantMessage() {
-        const input = document.getElementById("assistantInput");
-        const text = input.value.trim();
-        if (!text) return;
-        appendAssistantMessage("user", text);
-        input.value = "";
-        try {
-            const resp = await fetch("/api/ask", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: text })
-            });
-            const contentType = resp.headers.get("content-type") || "";
-            if (!contentType.includes("application/json")) {
-                const respText = await resp.text();
-                throw new Error(respText || `Unexpected response (${resp.status})`);
-            }
-            const data = await resp.json();
-            appendAssistantMessage("bot", data.reply || data.error || "Error");
-        } catch (err) {
-            appendAssistantMessage("bot", "Error: " + err.message);
-        }
-    }
 });
