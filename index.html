@@ -177,7 +177,7 @@
         <deep-chat id="chatBot" style="position: fixed; bottom: 20px; right: 20px;"></deep-chat>
     </div>
 
-    <script src="https://unpkg.com/deep-chat@2.2.2/dist/deepChat.bundle.js"></script>
+    <script type="module" src="https://unpkg.com/deep-chat@2.2.2/dist/deepChat.bundle.js"></script>
     <script>
         const chatBot = document.getElementById('chatBot');
         chatBot.directConnection = { openAI: { apiKey: window.OPENAI_API_KEY } };
